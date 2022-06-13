@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Группы{% endblock %}
+
+{% block body %}
+    <h1>Группы</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.name }}</td>
+                <td>
+                    <a href="{{ path('app_group_show', {'id': group.id}) }}">show</a>
+                    {% if app.user and app.user.isAdmin %}
+                    <a href="{{ path('app_group_edit', {'id': group.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if app.user and app.user.isAdmin %}
+    <a href="{{ path('app_group_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

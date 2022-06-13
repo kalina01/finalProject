@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Расписание{% endblock %}
+
+{% block body %}
+    <h1>Расписание</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>День</th>
+                <th>Пара</th>
+                <th>Группа</th>
+                <th>Предмет</th>
+                {% if app.user and app.user.isAdmin %}
+                <th>actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for schedule in schedules %}
+            <tr>
+                <td>{{ schedule.dayOfWeek }}</td>
+                <td>{{ schedule.class }}</td>
+                <td>{{ schedule.studentGroup }}</td>
+                <td>{{ schedule.subject }}</td>
+                {% if app.user and app.user.isAdmin %}
+                <td><a href="{{ path('app_schedule_edit', {'id': schedule.id}) }}">edit</a></td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if app.user and app.user.isAdmin %}
+    <a href="{{ path('app_schedule_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

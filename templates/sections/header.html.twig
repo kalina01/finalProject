@@ -1,0 +1,33 @@
+{% block header %}
+    <header>
+        <ul>
+            <li><a href="/home">Главная</a></li>
+            <li><a href="/schedule">Расписание</a></li>
+
+            {% if app.user and app.user.isAdmin %}
+                <li><a href="/admin/students">Студенты</a></li>
+                <li><a href="/admin/subject">Предметы</a></li>
+                <li><a href="/admin/group">Группы</a></li>
+            {% endif %}
+
+            {% if not app.user %}
+                <li class="user-info"><a href="/login">Войти</a></li>
+                <li class="user-info"><a href="/register">Регистрация</a></li>
+            {% else %}
+                <li class="user-info">
+                    {{ app.user }} - <a href="/logout">Выйти</a>
+                </li>
+            {% endif %}
+        </ul>
+    </header>
+{% endblock %}
+
+<style>
+    header > ul > li {
+        display: inline;
+    }
+    header > ul > .user-info {
+        float: right;
+        margin-left: 6px;
+    }
+</style>

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Картинки{% endblock %}
+
+{% block body %}
+    <h1>Картинки</h1>
+    <div>
+        <a href="/pictures/new">Загрузить картинку</a>
+    </div>
+    {% for picture in pictures %}
+        <a href="/pictures/{{ picture.name }}" target="__blank">
+            <img src="/pictures/{{ picture.name }}" alt="" width="250" style="margin: 16px">
+        </a>
+    {% endfor %}
+{% endblock %}

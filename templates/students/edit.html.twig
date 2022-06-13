@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Добавить в группу{% endblock %}
+
+{% block body %}
+    <h1>Добавить в группу</h1>
+
+    {{ include('students/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_students_index') }}">back to list</a>
+
+{% endblock %}

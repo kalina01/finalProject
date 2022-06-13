@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Редактировать предмет{% endblock %}
+
+{% block body %}
+    <h1>Редактировать предмет</h1>
+
+    {{ include('subject/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_subject_index') }}">back to list</a>
+
+    {% if app.user and app.user.isAdmin %}
+    {{ include('subject/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}
